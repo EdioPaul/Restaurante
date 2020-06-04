@@ -1,6 +1,8 @@
 package restaurante
 
 class AreaRestritaController {
+	
+	def springSecurityService
 
     def index() { 
 		
@@ -8,5 +10,16 @@ class AreaRestritaController {
 	
 	def logar(){
 		render(view: "/areaRestrita/logar")
+	}
+	
+	def admin(){
+		
+		String usuario = springSecurityService.principal.username
+		
+		render(view: "/areaRestrita/admin", model: [usuario: usuario])
+	}
+	
+	def logout(){
+		redirect(action: "logar")
 	}
 }
